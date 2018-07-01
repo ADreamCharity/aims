@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/tx      http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <!--
+    * ******************************************************************************************************************
+    * Configuration Imports
+    * ******************************************************************************************************************
+    -->
+    <import resource="classpath:spring/jpa/hibernateContext.xml" />
+
+
+    <!--
+    * ******************************************************************************************************************
+    * Package Scanning
+    * ******************************************************************************************************************
+    -->
+    <context:component-scan base-package="me.mike.aims.repository.jpa" />
+
+
+    <!--
+    * ******************************************************************************************************************
+    * Transaction Manager
+    * ******************************************************************************************************************
+    -->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />
+    <bean id="transactionManager"
+          class="org.springframework.orm.jpa.JpaTransactionManager"
+          p:entityManagerFactory-ref="entityManager" />
+
+
+    <!--
+    * ******************************************************************************************************************
+    * JPA Entity Managers
+    * ******************************************************************************************************************
+    -->
+    <bean id="entityManager"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+          p:packagesToScan="me.mike.aims.entity"
+          p:dataSource-ref="dataSource"
+          p:jpaVendorAdapter-ref="jpaVendorAdapter"
+          p:jpaDialect-ref="jpaDialect"
+          p:jpaProperties-ref="jpaProperties" />
+</beans>

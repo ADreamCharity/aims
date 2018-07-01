@@ -1,8 +1,9 @@
-User (May change to person / inheritance) (admin / client / volunteer / site leader)
+User (May change to person / inheritance) (admin / volunteer / site leader) (TODO Think about password resets)
 --id
 --username
---role (enum: admin / volunteer / site leader)
+--role (enum: admin / user / ??)
 --pass
+--email
 --lastName
 --firstName
 
@@ -161,8 +162,9 @@ InventoryAdjustment (Inheritance, flexible on table structure, dist. / manual / 
 --organizationId (only required for recv. type)
 
 
-Receivable
+Receivable (hook these into an event so they're visible on the calendar)
 --id
+--eventId (??)
 --status (pending / scheduled / complete)
 --scheduledReceiptDate (nullable)
 --actualReceiptDate (Should be automated, button press ??  Status??)
@@ -188,3 +190,5 @@ ClientDistribution
 --clientId
 --inventoryId
 --qty
+
+TODO Volunteer related shit

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans   http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/mvc     http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <!--
+    * ******************************************************************************************************************
+    * Package Scanning
+    * ******************************************************************************************************************
+    -->
+    <context:component-scan base-package="me.mike.aims.controller.rest" />
+
+
+    <!--
+    ********************************************************************************************************************
+    * Message Converter Configuration
+    ********************************************************************************************************************
+    -->
+    <mvc:annotation-driven enable-matrix-variables="true" content-negotiation-manager="negotiationManager">
+        <mvc:message-converters register-defaults="false">
+            <!--
+            * **********************************************************************************************************
+            *  MediaType: application/json
+            *  Default JSON Message Converter.  This is actually turned on by default.  This was disabled above
+            *  so that we can document its presence as well as configure it ourselves.
+            * **********************************************************************************************************
+            -->
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"
+                  p:prettyPrint="true"
+                  p:supportedMediaTypes="application/json" />
+
+
+            <!--
+            * **********************************************************************************************************
+            *  MediaType: application/xml
+            *  Default XML Message Converter.  This is actually turned on by default.  This was disabled above
+            *  so that we can document its presence as well as configure it ourselves.
+            * **********************************************************************************************************
+            -->
+            <bean class="org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter"
+                  p:prettyPrint="true"
+                  p:supportedMediaTypes="application/xml" />
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+
+    <!--
+    * ******************************************************************************************************************
+    *  Content Negotiation begins and ends with this; This bean is the definitive source.
+    *
+    *  This is where we configure how a client may request a specific format for a response.  In addition, we can
+    *  configure what formats are supported either by including activation.jar on the class-path or explicitly
+    *  specifying which MediaTypes are supported.
+    *
+    *  Note: Each supported MediaType will need a MessageConverter (see above) in order to be processed.  This can
+    *  be changed such that each would require a ViewResolver if we decide to return Views instead of simply writing
+    *  raw or formatted data to the HttpServletResponse OutputStream.
+    * ******************************************************************************************************************
+    -->
+    <bean id="negotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
+        <property name="defaultContentType" value="application/json" />
+        <property name="useJaf"             value="false"  />
+        <property name="ignoreAcceptHeader" value="true"   />
+        <property name="favorPathExtension" value="true"   />
+        <property name="favorParameter"     value="false"  />
+        <property name="parameterName"      value="format" />
+
+        <property name="mediaTypes">
+            <map>
+                <entry key="json" value="application/json" />
+                <entry key="xml"  value="application/xml"  />
+            </map>
+        </property>
+    </bean>
+</beans>

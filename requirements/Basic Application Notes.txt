@@ -12,3 +12,20 @@ Administrator Home Pages (Should this be linked from WordPress or make people re
 --Report generation
 --User (all) management (Flag clients for review, mark volunteers as need training, inactive, etc, log volunteer hours)
 --Would be cool to have a mobile app that could track volunteer time.  "Site Leader" only, which is distinct from "Volunteer" and "Admin"
+
+
+Navigation
+Administration
+--User Admin
+--Client Admin
+--Volunteer Admin
+--Donor Admin
+--Species Admin
+Events
+--Event Calendar
+--Location Management (Locations have Contacts to be managed)
+Inventory
+--Inventory Information
+--Receivables
+--Distribution
+Reports
