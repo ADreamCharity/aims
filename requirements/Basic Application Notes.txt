@@ -1,0 +1,14 @@
+Client Home Page (Login redirected from WordPress maybe?)
+--Registration
+--Verification
+--Various forms and an ability to upload items as a PDF.  Latter is optional, they can deliver physical copies in their place.  Disclaimer that it takes longer.
+
+Volunteer Home Page (Login redirected from WordPress ??)
+--Sign up for events
+--
+
+Administrator Home Pages (Should this be linked from WordPress or make people retain a separate URL?  admin.domain.com ??)
+--Inventory management
+--Report generation
+--User (all) management (Flag clients for review, mark volunteers as need training, inactive, etc, log volunteer hours)
+--Would be cool to have a mobile app that could track volunteer time.  "Site Leader" only, which is distinct from "Volunteer" and "Admin"

@@ -1,0 +1,190 @@
+User (May change to person / inheritance) (admin / client / volunteer / site leader)
+--id
+--username
+--role (enum: admin / volunteer / site leader)
+--pass
+--lastName
+--firstName
+
+UserAddress
+--userId
+--addressId
+
+UserPhone
+--userId
+--phoneId
+
+
+Client (inheritance - company / person)
+--id
+--type (person / organization)
+
+ClientPerson (Audit this)
+--firstName
+--lastName
+--status (pending / approved / suspended / verification)
+--waiver (pdf)
+--application (pdf)
+
+ClientVerification
+--id
+--clientId
+--userId (person receiving verification)
+--dateReceived
+--notes (free form, entered by staff accepting verification)
+
+ClientOrganization (?)
+--active
+--name
+--contactFirstName
+--contactLastName
+--contactEmail
+--charityCertification (pdf??)
+
+ClientAddress
+--clientId
+--addressId
+
+ClientPhone
+--clientId
+--phoneId
+
+Pets
+--id
+--clientId
+--speciesId
+--qty
+
+
+Address (Reuse for company / org / person / user / etc)
+--id
+--type
+--street1
+--street2
+--city
+--state
+--zip
+
+AddressType (Enum)
+--Home
+--Work
+--Mailing
+
+PersonAddress
+--personId
+--addressId
+
+
+Phone (Reuse for company / org / person / user / etc)
+--id
+--number
+--type
+
+PhoneType (Enum)
+--Home
+--Cell
+--Work
+
+PersonPhone
+--personId
+--phoneId
+
+
+Donor (Revisit this -- sponsors and donors are different, and the lines are fuzzy technically speaking)
+--id
+--name
+--contactName
+--contactEmail
+--Sponsorship Plan Information (??)
+
+DonorPhone
+--organizationId
+--phoneId
+
+DonorAddress
+--organizationId
+--addressId
+
+
+Event (What are the event types?  Enum or data driven?  Leaning toward data driven...)
+--id
+--typeId
+--duration
+--startTime
+--location
+--eventContact
+--eventCoordinator (userId)
+
+EventType (TODO: Track volunteer hours)
+--id
+--name
+--description
+--????
+
+EventLocation
+--id
+--name
+
+EventLocationAddress
+--eventLocationId
+--addressId
+
+EventContact
+--id
+--name
+--title
+
+EventContactPhone
+--eventContactId
+--phoneId
+
+
+Species
+--id
+--name (dog / cat / etc -- tied to inventory)
+--desc
+
+Inventory
+--id
+--qty
+--type (Wet / Dry / Treat / Program Misc. / Office Supplies / Office Equipment -- may need to be data driven ...  would have to tie in a uom and everything at this point...)
+--species
+--distributable (boolean)
+
+InventoryAdjustment (Inheritance, flexible on table structure, dist. / manual / recv -- need to fk out to the relevant relational tables)
+--id
+--inventoryId
+--type (manual / dist. / recv.)
+--qty
+--reason (string - required when manual type)
+--clientId (only required for dist. type)
+--organizationId (only required for recv. type)
+
+
+Receivable
+--id
+--status (pending / scheduled / complete)
+--scheduledReceiptDate (nullable)
+--actualReceiptDate (Should be automated, button press ??  Status??)
+--type (purchase / donation)
+--inventoryId (which inventory are we receiving for ... multiple?)
+
+InventoryReceivable
+--id
+--receivableId
+--inventoryId
+--expectedQty
+--receivedQty
+
+
+Distribution
+--id
+--eventId
+--status (scheduled / complete)
+
+ClientDistribution
+--id
+--distributionId
+--clientId
+--inventoryId
+--qty

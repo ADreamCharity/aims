@@ -1,0 +1,54 @@
+Setup Investment: $500
+Monthly Budget: $100 (Hosting around $5)
+
+
+Web / Mobile?  If web, app or site?  Both?  All???
+--Lets start with a web based application.
+--Three separate "apps" running off the same rest api
+--Start with administrative, carrying virtually all of the functionality
+--Bring volunteer and client side interactions online after.  Much smaller in scope.
+--Any order or all at once ... doesn't matter.
+
+
+Users
+--Roles / Permissions (Types, but should restrict access - can we leverage inheritance and base off of "Person" as a base class or something?)
+--|--Client (Can they log in?  What shit can they do if they can?)
+--|--Volunteer (Can they log in ?  What shit can they do if they can?)
+--|--Administrator (Can log in, can do shit)
+
+
+Organization
+--Donors / Sponsors (Types??)
+--What is this for?  Provide tax receipts?
+--Track what they donate and amounts.  Should this tie into inventory?
+
+
+Inventory
+--Inventory Types
+--|--Wet
+--|--Dry
+--|--Treat
+--|--Other // General
+--Attach inventory to a pet species (Dog / cat / other)
+--Need to adjust inventory.  Record receivables, distributions, manual adjustments.  Track these historically.  Need to report off of the inventory metrics.
+--Each inventory type has it's own UOM.  UOM not likely to change ever.  Record the quatity and let UOM be assumed during presentation tier.
+--Receivables have a type: Donation or Purchase.  Need to track this.
+--Inventory is tied to a species.  All inventory.  Should probably be able to report on the inventory / species overall and individually.
+
+
+Event Management
+--Hook into Google Calendar?  Make sure this provides everything they want / need
+--Events have types (Training / dog wash / etc ??  should probably be visible to people based upon type??  Event api here ?)
+--Probably need a proprietary calendar for signups and shit for volunteers.
+--|--Would be good for a volunteer mobile app -- 1 click event signup
+--|--Hook into local paper advertisement -- this will def require something proprietary
+--|--Hooks into various social media -- spring has an API for this iirc
+
+
+Reports
+--Jasper // Birt
+--Inventory related reports
+--|--Used for local inventory tracking
+--|--Probably used for tax-related receipts for internal and external use
+--|--Volunteer activity tracker (Will require some way of tracking a volunteers hours donated internally - not sure how this will be handled ...)
+
